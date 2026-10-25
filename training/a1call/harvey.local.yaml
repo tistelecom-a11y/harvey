@@ -1,0 +1,113 @@
+# A1 Telecom — Harvey config (pilot UA / MD / GE / PL), v2 2026-10-25.
+# Copy to ./harvey.local.yaml (it wins over harvey.yaml). Approval mode only.
+
+persona:
+  name: "A1 Telecom Sales"
+  company: "A1 Telecom"
+  role: "Business Development"
+  email: "sales@a1call.me"        # replace with the mailbox on the dedicated sending domain before the first send
+  linkedin: "linkedin.com/in/a1telecom"
+  tone: "деловой, технически точный, без преувеличений; короткие письма с одним вопросом"
+
+product:
+  name: "A1 Telecom — SIP trunk, DID, cloud PBX, voice termination"
+  description: >-
+    Международный оператор голосовой связи: SIP-транк и DID для колл-центров,
+    интеграторов АТС и разработчиков голосовых AI-ассистентов; облачная АТС;
+    оптовая терминация в 200+ стран через прямой интерконнект со 100+ операторами.
+  pricing: "Индивидуальный расчёт под объём и направления; посекундно, без абонплаты и скрытых платежей. Цены в письмах не называть."
+  key_benefits:
+    - "Аптайм 99,99 % за счёт резервных линий и мониторинга"
+    - "Прямой интерконнект со 100+ операторами, терминация в 200+ стран"
+    - "Посекундная тарификация, без скрытых платежей"
+    - "Подключение за 1–3 дня, бесплатный тест"
+    - "80 CPS по умолчанию, расширение без переподключения"
+    - "SIP по UDP/TCP/TLS, шифрование голоса; совместимость с Asterisk, FreePBX, Issabel, Retell, ElevenLabs"
+    - "ASR, ACD и PDD p95 по направлениям — вместе с тарифами"
+  objection_responses:
+    "too expensive": "Понимаю. Мы считаем посекундно и без абонплаты, поэтому сравнивать лучше на ваших реальных направлениях. Пришлёте 3–5 главных направлений и объём — менеджер сделает расчёт."
+    "already have a solution": "Это нормально. Обычно нас подключают вторым транком на бесплатный тест и сравнивают PDD и ASR. Какие направления у вас самые важные?"
+    "not interested": "Понял, спасибо. Если когда-нибудь понадобится второй транк или номера для голосовых агентов, — просто ответьте на это письмо."
+    "what is the price": "Ставки зависят от направлений и объёма. Менеджер пришлёт тарифы вместе с ASR, ACD и PDD p95 по вашим направлениям."
+    "do you have CLI routes to Poland": "Только легально: через местный DID с проверкой документов на номер. Подмену номера не предлагаем."
+  offer:
+    primary: "SIP-транк и DID для колл-центров и голосовых AI-агентов"
+    entry: "Бесплатный тест маршрутов, в том числе входящих звонков на DID"
+    goal: "book_call"
+    booking_method: "ask_preference"
+    booking_url: ""
+    meeting_duration: "15 minutes"
+    meeting_owner: "менеджер по продажам A1 Telecom"
+
+icp:
+  industries:
+    - "call center"
+    - "contact center outsourcing"
+    - "voice AI agents"
+    - "conversational AI"
+    - "PBX integrator"
+    - "VoIP provider"
+  company_size: "10-300 employees"
+  titles:
+    - "CEO"
+    - "Founder"
+    - "Co-Founder"
+    - "CTO"
+    - "Head of Contact Center"
+    - "Operations Director"
+    - "Technical Director"
+  geography:
+    - "Ukraine"
+    - "Moldova"
+    - "Georgia"
+    - "Poland"
+  hiring_signals:
+    - "call center operator"
+    - "оператор кол-центру"
+    - "konsultant call center"
+    - "voice AI engineer"
+    - "conversational AI developer"
+    - "Asterisk engineer"
+    - "VoIP engineer"
+
+channels:
+  email:
+    enabled: true
+    provider: "gmail"
+    max_daily_sends: 20
+    require_approval: true        # never switch to autopilot
+    link_domains: ["a1call.me"]
+    send_to_risky: false
+    max_bounce_rate: 0.03
+    warmup:
+      start_date: ""              # set the day warmup starts on the dedicated domain
+      min_days: 14
+      start_sends: 5
+      daily_increase: 2
+    send_window:
+      start: "09:00"
+      end: "17:00"
+      weekdays_only: true
+      recipient_timezone: true
+  linkedin:
+    enabled: false
+    max_daily_connections: 20
+    max_daily_messages: 10
+
+usage:
+  max_daily_claude_percent: 50
+  heartbeat_interval_minutes: 30
+  quiet_hours:
+    start: "20:00"
+    end: "08:00"
+    timezone: "Europe/Kyiv"
+
+compliance:
+  postal_address: ""              # not published by A1 Telecom; leave empty
+  opt_out_line: 'Not relevant? Reply STOP and I won''t email again. / Неактуально? Відповідайте STOP.'
+  precleared:
+    enabled: false                # supports GB/US senders only
+
+brain:
+  provider: "claude"
+  model: ""
